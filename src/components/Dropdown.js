@@ -1,29 +1,38 @@
-import React, { useState } from 'react';
-import Select from 'react-select';
+import React, { useState } from "react";
 
-const options = [
-  { value: '1', label: 'Gen 1' },
-  { value: '2', label: 'Gen 2' },
-  { value: '3', label: 'Gen 3' },
-  { value: '4', label: 'Gen 4' },
-  { value: '5', label: 'Gen 5' },
-  { value: '6', label: 'Gen 6' },
-  { value: '7', label: 'Gen 7' },
-  { value: '8', label: 'Gen 8' },
-  { value: '9', label: 'Gen 9' }
-];
+export default function Dropdown({ options, parentCallBack }) {
+  let [selected, setSelected] = useState(() => {
+    let temp = [];
+    options.map((item) => {
+      return (temp = [...temp, true]);
+    });
+    return temp;
+  });
 
-export default function Dropdown() {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const handleChange = (event) => {
+    let temp = selected;
+    temp[event.target.value - 1] = !temp[event.target.value - 1];
+    setSelected(temp);
+    parentCallBack(selected);
+  };
 
   return (
     <div className="Dropdown">
-      <Select
-        defaultValue={selectedOption}
-        onChange={setSelectedOption}
-        options={options}
-        isMulti = {true}
-      />
+      <form onChange={handleChange}>
+        {options.map((option) => {
+          return (
+            <div key={option}>
+              <input
+                type="checkbox"
+                defaultChecked={true}
+                id={option}
+                value={option}
+              />
+              <label>{"Gen " + option}</label>
+            </div>
+          );
+        })}
+      </form>
     </div>
   );
 }
