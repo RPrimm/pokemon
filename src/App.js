@@ -26,7 +26,7 @@ function App() {
           />
         </div>
       </div>
-      <div className="selections">
+      {/* <div className="selections">
         <div className="select">
           <button>Gen 1</button>
           <button>Gen 2</button>
@@ -43,7 +43,7 @@ function App() {
             return <button>{type}</button>
           })}
         </div>
-      </div>
+      </div> */}
 
       <div className="pokemons">
         <div className="pokemons-content">
